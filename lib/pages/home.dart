@@ -44,7 +44,7 @@ class _StackPartState extends State<StackPart> {
           options: CarouselOptions(
               viewportFraction: 1.0,
               height: MediaQuery.of(context).size.height * 0.6,
-              autoPlay: true,
+               autoPlay: true,
               enableInfiniteScroll: true,
               onPageChanged: (index, reason) {
                 setState(() {
@@ -96,8 +96,8 @@ class _StackPartState extends State<StackPart> {
         Padding(
           padding: EdgeInsets.all(30),
           child: OutlineSearchBar(
-            backgroundColor: Colors.grey,
-            borderColor: Colors.white,
+            backgroundColor: Colors.transparent,
+            borderColor: Colors.transparent,
           ),
         ),
         Positioned(
