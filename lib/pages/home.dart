@@ -1,3 +1,4 @@
+import 'package:as_task6/routes/routes.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
           statusBarBrightness: Brightness.dark),
     );
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Color(0xFFECEFF1),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,7 @@ class _StackPartState extends State<StackPart> {
           options: CarouselOptions(
               viewportFraction: 1.0,
               height: MediaQuery.of(context).size.height * 0.6,
-               autoPlay: true,
+              autoPlay: true,
               enableInfiniteScroll: true,
               onPageChanged: (index, reason) {
                 setState(() {
@@ -94,9 +95,13 @@ class _StackPartState extends State<StackPart> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.only(top: 30, left: 20, right: 20),
           child: OutlineSearchBar(
-            backgroundColor: Colors.transparent,
+            searchButtonIconColor: Colors.white,
+            searchButtonPosition: SearchButtonPosition.leading,
+            backgroundColor: Colors.white.withOpacity(0.1),
+            hintText: "What are you looking for?",
+            hintStyle: TextStyle(color: Colors.white),
             borderColor: Colors.transparent,
           ),
         ),
@@ -153,12 +158,27 @@ class TrendingList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 20, left: 20),
-          child: Text(
-            "Trending ",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-          ),
+          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+              "Trending ",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, MyRoutes.itemRoute);
+              },
+              child: Text(
+                "Show All",
+                style:
+                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
+            )
+          ]),
         ),
         Padding(
           padding: EdgeInsets.only(top: 20),
@@ -271,7 +291,18 @@ class Categories extends StatelessWidget {
             padding: EdgeInsets.only(top: 20),
             child: ExpansionTileCard(
               leading: Icon(CupertinoIcons.person, color: Colors.black),
-              title: Text("Women 228 items"),
+              title: Row(children: [
+                Text(
+                  "Women",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "(220 items)",
+                      style: TextStyle(color: Colors.grey),
+                    ))
+              ]),
               children: [
                 Padding(
                     padding: EdgeInsets.only(top: 20, bottom: 20),
@@ -283,11 +314,24 @@ class Categories extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 20, top: 20),
             child: ExpansionTileCard(
               leading: Icon(CupertinoIcons.person, color: Colors.black),
-              title: Text("Men 228 items"),
+              title: Row(children: [
+                Text(
+                  "Men",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      "(228 items)",
+                      style: TextStyle(color: Colors.grey),
+                    ))
+              ]),
               children: [
                 Padding(
                     padding: EdgeInsets.only(top: 20, bottom: 20),
-                    child: Text("Expended"))
+                    child: Text(
+                      "Expended",
+                    ))
               ],
             ),
           )

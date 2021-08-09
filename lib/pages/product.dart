@@ -1,11 +1,17 @@
+import 'package:as_task6/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
+  @override
+  _ProductPageState createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -14,15 +20,16 @@ class ProductPage extends StatelessWidget {
           statusBarBrightness: Brightness.dark),
     );
     return Scaffold(
+        backgroundColor: Color(0xFFECEFF1),
         body: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          StackPart(),
-          SetText(),
-        ],
-      ),
-    ));
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              StackPart(),
+              SetText(),
+            ],
+          ),
+        ));
   }
 }
 
@@ -94,7 +101,9 @@ class StackPart extends StatelessWidget {
                   )),
               Spacer(),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, MyRoutes.cartRoute);
+                  },
                   icon: Icon(
                     CupertinoIcons.cart,
                     color: Colors.white,
@@ -107,9 +116,14 @@ class StackPart extends StatelessWidget {
   }
 }
 
-class SetText extends StatelessWidget {
+class SetText extends StatefulWidget {
   const SetText({Key? key}) : super(key: key);
 
+  @override
+  _SetTextState createState() => _SetTextState();
+}
+
+class _SetTextState extends State<SetText> {
   @override
   Widget build(BuildContext context) {
     String price = "30.99";
@@ -142,18 +156,18 @@ class SetText extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ColorBar(color: Colors.purple),
-                ColorBar(color: Colors.pink),
-                ColorBar(color: Colors.blue),
-                ColorBar(color: Colors.teal)
+                ColorBar(color: Colors.white),
+                ColorBar(color: Colors.grey),
+                ColorBar(color: Colors.black),
+                ColorBar(color: Colors.blue)
               ],
             ),
           ),
           SetSize(),
           Padding(
-            padding: EdgeInsets.only(top: 20, right: 20, bottom: 10),
+            padding: EdgeInsets.only(top: 50, right: 20, bottom: 10),
             child: Container(
-              height: 40,
+              height: 50,
               width: MediaQuery.of(context).size.width,
               child:
                   ElevatedButton(onPressed: () {}, child: Text("Add to Cart")),
@@ -172,8 +186,8 @@ class ColorBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      height: 30,
+      width: 25,
+      height: 25,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: color,
@@ -182,9 +196,14 @@ class ColorBar extends StatelessWidget {
   }
 }
 
-class SetSize extends StatelessWidget {
+class SetSize extends StatefulWidget {
   const SetSize({Key? key}) : super(key: key);
 
+  @override
+  _SetSizeState createState() => _SetSizeState();
+}
+
+class _SetSizeState extends State<SetSize> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -219,18 +238,35 @@ class SetSize extends StatelessWidget {
   }
 }
 
-class SetSizeContent extends StatelessWidget {
+class SetSizeContent extends StatefulWidget {
   final String size;
   const SetSizeContent({Key? key, required this.size}) : super(key: key);
 
   @override
+  _SetSizeContentState createState() => _SetSizeContentState();
+}
+
+class _SetSizeContentState extends State<SetSizeContent> {
+  int check = 0;
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      child: Center(
-        child: Text(
-          size,
-          style: TextStyle(fontSize: 25, color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          Border.all(
+            color: Colors.blue,
+          );
+          check = 1;
+        });
+      },
+      child: Container(
+        width: 50,
+        height: 40,
+        child: Center(
+          child: Text(
+            widget.size,
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
         ),
       ),
     );
